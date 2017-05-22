@@ -103,7 +103,14 @@ public class NewsActivity extends AppCompatActivity {
                         Gson mGson = new Gson();
                         NewsBean newsBean = mGson.fromJson(response, NewsBean.class);
                         NewsBean.DataBean data = newsBean.getData();
-                        Glide.with(NewsActivity.this).load(data.getImg_url()).into(newsImg);
+                        String imgUrl = data.getImg_url();
+                        if (imgUrl.startsWith("/")) {
+                            String url = "http:" + imgUrl;
+                            Glide.with(NewsActivity.this).load(url).into(newsImg);
+                        } else {
+                            String url = imgUrl;
+                            Glide.with(NewsActivity.this).load(url).into(newsImg);
+                        }
                         tvTitle.setText(data.getTitle());
                         tvSource.setText(data.getSource());
                         String date = CommonUtils.getDate(data.getTime());

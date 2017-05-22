@@ -12,6 +12,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.blankj.utilcode.utils.LogUtils;
+import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.joeykwok.haoqiuv2017.R;
 import com.joeykwok.haoqiuv2017.commons.GlobalConsts;
@@ -89,7 +90,14 @@ public class HomeFragment extends Fragment {
                             final List<String> titles = new ArrayList<String>();
 
                             for (int i = 0; i < newsDataList.size(); i++) {
-                                imgUrls.add(newsDataList.get(i).getPic());
+                                String imgUrl = newsDataList.get(i).getPic();
+                                if (imgUrl.startsWith("/")) {
+                                    String url = "http:" + imgUrl;
+                                    imgUrls.add(url);
+                                } else {
+                                    String url = imgUrl;
+                                    imgUrls.add(url);
+                                }
                                 titles.add(newsDataList.get(i).getTitle());
                             }
 

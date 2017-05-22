@@ -1,6 +1,7 @@
 package com.joeykwok.haoqiuv2017.main;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -60,7 +61,15 @@ public class NewsListAdapter extends BaseAdapter {
         NewsListBean.DataBean data = mList.get(i);
         holder.tvTitle.setText(data.getTitle());
         holder.tvSource.setText(data.getSource());
-        Glide.with(context).load(data.getPic()).into(holder.imgNews);
+        Log.d("Joey", data.getPic());
+        String imgUrl = data.getPic();
+        if (imgUrl.startsWith("/")) {
+            String url = "http:" + imgUrl;
+            Glide.with(context).load(url).into(holder.imgNews);
+        } else {
+            String url = imgUrl;
+            Glide.with(context).load(url).into(holder.imgNews);
+        }
 //        holder.tvTime.setText(data.getTime());
         return view;
     }
