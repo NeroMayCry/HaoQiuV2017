@@ -1,2 +1,3 @@
 # HaoQiuV2017
-2017版HaoQiu程序Android版源码
+
+Source code of HaoQiu Android version 2017.
